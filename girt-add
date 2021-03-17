@@ -1,0 +1,12 @@
+#!/bin/dash
+
+if test ! -e ".girt"
+then
+	echo "there is no girt repo"
+	exit 1
+fi
+for files in $@
+do
+	cp "$files" .girt/.index
+	#echo "success"
+done

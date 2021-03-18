@@ -13,10 +13,22 @@ do
 	#test if file included in command line
 	if test -e "$files"
 	then
-		#compare existing 
-		#copy file to index
-		cp "$files" .girt/.index
-		#echo "success"
+
+		#compare file with existing files in index 
+			#if identical break 
+		
+
+		# test if valid filename
+		if echo "$files" | egrep '^[a-zA-Z0-9]' | egrep -qv '[^a-zA-Z0-9\_\-\.]'
+		then
+			#copy file to index
+			cp "$files" .girt/.index
+			#echo "Success"	
+		
+		else
+			echo girt-add: error: invalid filename "$file"
+			exit 1
+		fi
 	else
 		#file not included in command 
 		echo "girt-add: error: can not open 'non_existent_file'"

@@ -2,11 +2,24 @@
 
 if test ! -e ".girt"
 then
-	echo "there is no girt repo"
+	echo "girt-add: error: girt repository directory .girt not found"
 	exit 1
 fi
+
+
+
 for files in $@
 do
-	cp "$files" .girt/.index
-	#echo "success"
+	#test if file included in command line
+	if test -e "$files"
+	then
+		#compare existing 
+		#copy file to index
+		cp "$files" .girt/.index
+		#echo "success"
+	else
+		#file not included in command 
+		echo "girt-add: error: can not open 'non_existent_file'"
+		exit 1
+	fi
 done

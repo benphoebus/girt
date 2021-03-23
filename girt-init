@@ -7,8 +7,11 @@ else
 	mkdir .girt
 	echo "Initialized empty girt repository in .girt"
 
+
 	cd .girt
 	mkdir .index
+	mkdir .commit
+	touch log.txt
 	cd ..
 fi
 

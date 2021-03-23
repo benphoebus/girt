@@ -1,0 +1,156 @@
+#!/bin/dash
+
+#code taken from previous assignment "Shrug" - self-plagarism allowed as per Andrew's email 23/3/21
+
+#check if girt exists
+if test -e ".girt"
+then
+	:
+else
+	echo "girt-commit: errror: no .girt directory containing girt repositroy exists"
+	exit 1
+fi
+
+
+message=$2
+
+commit_successful=0
+num_commits=$(cat ".girt/log.txt" | wc -l)
+
+#ensure num_commits is >= 0
+if [ "$num_commits" -lt 0 ]
+then
+        num_commits=0
+fi
+
+#check if message included
+if test $# -lt 2
+then
+	echo "usage: girt-commit [-a] -m commit-message"
+	exit 1
+fi
+
+
+#run girt-add on all files that were in the previous commit and have been modified
+if [ "$1" = "-a" ]
+then
+	message=$3
+	
+	#file in previous commit, check if modified and add to repo
+	for file in $(ls .girt/.commit/)
+	do
+		#create previous commit folder if it does not yet exist
+		if test -e ".girt/.commit/$num_commits"
+		then
+			:
+		else
+			cd .girt/.commit
+			mkdir $num_commits
+			cd ../..
+		fi
+		
+		cp "$file" ".girt/.commit/$num_commits/$file" 2>/dev/null
+		
+		commit_successful=1
+
+		#check if files are stored in repo 
+		#if they are diff to the files in repo add to repo
+		if cmp -s ".girt/.commit/$num_commits/$file" ".girt/.commit/${file##*/}"
+		then
+			cp "$file" ".girt/.commit/$file"
+			cp "$file" ".girt/$file"
+		fi 
+		
+	done	
+fi
+
+
+#if no '-a' flag ensure commit message does not start with a '-'
+if [ "$2" = "$message" ]
+then
+	if echo "$2" | egrep -q '^[-]'
+	then
+		echo "usage: girt-commit [-a] -m commit-message"
+		exit 1
+	fi
+elif [ "$3" = "$message" ]
+then
+	if echo "$3" | egrep -q '^[-]'
+	then
+		echo "usage: girt-commit [-a] -m commit-message"
+		exit 1
+	fi
+fi
+
+
+#check if file in index is the same as file in the repo.
+for file in $(ls .girt/.index)
+do
+	if cmp -s ".girt/.index/$file" ".girt/.commit/${file##*/}"
+	then
+		echo "nothing to commit"
+	fi
+done
+
+#commit files in index to repo
+for file in $(ls .girt/.index)
+do
+	#if added file the same as file already in repo
+	if cmp -s ".girt/.index/$file" ".girt/${file##*/}"
+	then
+		#copy previously committed file to current commit folder
+		if test -e ".girt/.commit/$num_commits"
+		then
+			#if previous commit folder non-existent create the folder
+			if test -e ".girt/.commit/$num_commits"
+			then
+				:
+			else
+				cd .girt/.commit
+				mkdir $num_commits
+				cd ../..
+			fi
+
+			#copy added file to committed folder
+			cp ".girt/.index/$file" ".girt/.commit/$num_commits/$file"
+
+		fi
+	else
+
+		#create a folder for each current/previous commit that stores the files in that state
+		if test -e ".girt/.commit/$num_commits"
+		then
+			:
+		else
+			cd .girt/.commit
+			mkdir $num_commits
+			cd ../..
+		fi
+
+		#copy file to commit folder and repo
+		cp ".girt/.index/$file" ".girt/.commit/$num_commits/$file"
+		cp ".girt/.index/$file" ".girt/.commit/$file"
+		cp ".girt/.index/$file" ".girt/$file"
+		
+		commit_successful=1	
+
+	fi
+
+done
+
+
+#if commit successful update girt-log and remove added files from index.
+if [ "$commit_successful" -ne 0 ]
+then
+	
+	echo "Committed as commit $num_commits"
+	echo "$num_commits $message" >> .girt/log.txt
+
+	#remove commited files from index
+	for file in $(ls .girt/.index)
+	do
+		rm ".girt/.index/$file"
+	done
+fi
+
+exit 0

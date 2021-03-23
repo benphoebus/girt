@@ -10,4 +10,7 @@ Wednesday  17th March - 0800 - 1300
 	began working on subset0 . girt-init was simple enough and had a basic girt add working by end of the day . committed to gitlab. had to re-read the spec and play around with 2041 girt to understnad what was happening with girt-add and what happens when you dont add a file etc,
 
 Thursday 18th March - 1400 - 1800
-	managed to pass most of the girt-add autotests. need to work on comparing the the indexed file and the file i am looking to add per the lecture? . more research required . managed to get the issue of invalid filenames sorted as well
+	managed to pass most of the girt-add autotests. need to work on comparing the the indexed file and the file i am looking to add per the lecture? . more research required . managed to get the issue of invalid filenames sorted as wel
+
+Wednesday 24th March
+	Received an email from Andrew stating we were allowed to submit our own work again. Will need to go back and make a note in each file that that is what I have done. Previous attempt wasnt the best so I need to continue working through subset 1 and hope to get that finished off later this week as well as test suite. 

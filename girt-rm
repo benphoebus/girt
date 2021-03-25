@@ -1,0 +1,17 @@
+#!/bin/dash
+
+if test ! -e ".girt"
+then
+	echo "girt-rm: error: girt repository directory .girt not found"
+	exit 1
+fi
+
+if test $# -lt 2
+then
+	echo "usage: girt-rm [--force] [--cached] <filenames>"
+	exit 1
+fi
+
+#fileToRemove=$2
+
+

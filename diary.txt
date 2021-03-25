@@ -12,5 +12,11 @@ Wednesday  17th March - 0800 - 1300
 Thursday 18th March - 1400 - 1800
 	managed to pass most of the girt-add autotests. need to work on comparing the the indexed file and the file i am looking to add per the lecture? . more research required . managed to get the issue of invalid filenames sorted as wel
 
-Wednesday 24th March
+Wednesday 24th March 0900 - 1030
 	Received an email from Andrew stating we were allowed to submit our own work again. Will need to go back and make a note in each file that that is what I have done. Previous attempt wasnt the best so I need to continue working through subset 1 and hope to get that finished off later this week as well as test suite. 
+
+Wednesday 24th March 1600 1830
+	ive fucked up. my girt show doesnt work correctly. going to need to fix it. it passes the autotests but it doesnt work with the girt-rm tasks. might need to tear down and start agai
+
+Thursday 25th March 0800 1230
+	spent this morning trying to re-write girt-show . what a waste of time. couldnt get it working for subset0_9 the girt-show 1:b 'hello world' becuase b was not committed to commit file 1 and my code was saying error file not found and the autotest didnt like that so when i changed things around it would throw errors for other things. so im just gonna leave my girt-show using last years code since it passes more autotests. may still need to re-work it in order to get girt-rm to work. tired unimpresses. logging off.

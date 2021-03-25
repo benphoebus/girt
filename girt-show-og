@@ -52,7 +52,8 @@ else
 			#check if file is within previous commit folder
 			if test -e .girt/.commit/$commit/$filename
 			then
-				:
+				echo "girt-show: error: '$filename' not found in commit '$commit'"
+				#exit 1
 			else
 				cat .girt/.commit/$filename
 				exit 1

@@ -20,3 +20,6 @@ Wednesday 24th March 1600 1830
 
 Thursday 25th March 0800 1230
 	spent this morning trying to re-write girt-show . what a waste of time. couldnt get it working for subset0_9 the girt-show 1:b 'hello world' becuase b was not committed to commit file 1 and my code was saying error file not found and the autotest didnt like that so when i changed things around it would throw errors for other things. so im just gonna leave my girt-show using last years code since it passes more autotests. may still need to re-work it in order to get girt-rm to work. tired unimpresses. logging off.
+
+Thursday 25th March 1400 1630
+	i think the problem is now with the girt-commit. too long and a naive apprach. might need to restructure my girt repo to have moe than just an index and a commits folder. I am hopeing with the introduction of a third or fourth folder it will be easier to keep track of file changes and make them display with girt-show or not. more thinking and research to do 

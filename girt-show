@@ -1,6 +1,6 @@
 #!/bin/dash
 
-set -u
+#set -u
 
 if [ ! -d .girt ]
 then
@@ -47,9 +47,9 @@ then
 		#check to see if file exists in commit 
 		if test -f .girt/.commit/"$filename"
 		then
-			#cat .girt/.commit/"$filename"
-			#exit 0
-			:
+			cat .girt/.commit/"$filename"
+			exit 0
+			
 		else
 			echo "girt-show: error: '$filename' not found in index"
 			exit 1

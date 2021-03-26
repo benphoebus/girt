@@ -84,13 +84,14 @@ fi
 
 
 #check if file in index is the same as file in the repo.
-for file in $(ls .girt/.index)
-do
-	if cmp -s ".girt/.index/$file" ".girt/.commit/${file##*/}"
+#for file in $(ls .girt/.index)
+#do
+	if cmp -s ".girt/.index/$1" ".girt/.commit/${1##*/}"
 	then
 		echo "nothing to commit"
+		exit 1
 	fi
-done
+#done
 
 #commit files in index to repo
 for file in $(ls .girt/.index)
@@ -145,12 +146,14 @@ then
 	
 	echo "Committed as commit $num_commits"
 	echo "$num_commits $message" >> .girt/log.txt
+	exit 0
 
 	#remove commited files from index
-	for file in $(ls .girt/.index)
-	do
-		rm ".girt/.index/$file"
-	done
+	#for file in $(ls .girt/.index)
+	#do
+	#	rm ".girt/.index/$file"
+	#done
 fi
+echo "nothing to commit"
 
 exit 0

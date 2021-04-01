@@ -12,7 +12,7 @@ else
 fi
 
 
-message=$2
+message="$2"
 
 commit_successful=0
 num_commits=$(cat ".girt/log.txt" | wc -l)
@@ -35,33 +35,41 @@ fi
 if [ "$1" = "-a" ]
 then
 	message=$3
-	
-	#file in previous commit, check if modified and add to repo
-	for file in $(ls .girt/.commit/)
+	for file in $(ls $path)
 	do
+		girt-add "$file"
+	done
+	#file in previous commit, check if modified and add to repo
+#	for file in $(ls .girt/.commit/)
+#	do
 		#create previous commit folder if it does not yet exist
-		if test -e ".girt/.commit/$num_commits"
-		then
-			:
-		else
-			cd .girt/.commit
-			mkdir $num_commits
-			cd ../..
-		fi
+#		if test -e ".girt/.commit/$num_commits"
+#		then
+#			:
+#		else
+#			cd .girt/.commit
+#			mkdir $num_commits
+#			cd ../..
+#		fi
 		
-		cp "$file" ".girt/.commit/$num_commits/$file" 2>/dev/null
+#		cp "$file" ".girt/.commit/$num_commits/$file" 2>/dev/null
 		
-		commit_successful=1
+#		commit_successful=1
 
 		#check if files are stored in repo 
 		#if they are diff to the files in repo add to repo
-		if cmp -s ".girt/.commit/$num_commits/$file" ".girt/.commit/${file##*/}"
-		then
-			cp "$file" ".girt/.commit/$file"
-			cp "$file" ".girt/$file"
-		fi 
+		#if cmp -s ".girt/.commit/$num_commits/$file" ".girt/.commit/${file##*/}"
+		#then
+		#	cp "$file" ".girt/.commit/$file"
+		#	cp "$file" ".girt/$file"
+		#fi 
+
+		#girt-add "$file"
 		
-	done	
+	#done	
+
+	#girt-commit -m "$3"
+	#exit 0
 fi
 
 

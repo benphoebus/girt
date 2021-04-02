@@ -12,6 +12,22 @@ then
 	exit 1
 fi
 
-#fileToRemove=$2
+cach="$1"
+#fileToRemove="$2"
 
-
+#if --cached
+if [ "$1" = "--cached" ]
+then
+	for file in $(ls .girt/.index)
+	do
+		if test  ! -e ".girt/.index"/"$file"
+		then
+			echo "girt-rm: error: '$file' is not in the girt repository"
+			exit 1
+		else
+			rm ".girt/.index/$file"
+			exit 0
+		fi
+	done
+fi
+			

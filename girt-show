@@ -1,71 +1,80 @@
 #!/bin/dash
 
-#set -u
+#if [ ! -d ".girt"]
+#then
+	#echo "girt-show: error: girt repository does not exist"
+	#exit 1
+#fi
 
-if [ ! -d .girt ]
+
+commit=`echo "$1" | cut -d ':' -f1`
+filename=`echo "$1" | cut -d ':' -f2`
+total_commits=$(cat ".girt/log.txt" | wc -l)
+
+total_commits=$((total_commits-1))
+
+if [ "$total_commits" -lt 0 ]
 then
-	echo "girt-show: error: no .girt directory containing girt repository exists" 1&>2
-	exit 1
-fi
-
-commit=$(echo "$1" | cut -d ':' -f1)
-filename=$(echo "$1" | cut -d ':' -f2)
-
-# test is num commits exists
-if test ! -d .girt/.commit/"$commit"
-then
-	echo "girt-show: error: unknown commit '$commit'"
-	exit 1
-fi
-
-# test if commit is numeric if not throw error
-if test "$commit" | egrep '^[^0-9]'
-then
-	echo "girt-show: error: unknown commit '$commit'"
-	exit 1
-fi
-
-# test is filename is empty
-if test -z "$filename"
-then
-	echo "girt-show: error: invalid filename '$filename'"
-	exit 1
+	total_commits=0
 fi
 
 
-#if commit num is empty check index
-if [ -z "$commit" ]
+#if commit number not given
+if [ "$commit" = "" ]
 then
-	# look for file in commit
-	#if test -e .girt/.commit/"$filename"
-	#then
-	#	cat .girt/.commit/"$filename"
-	#	exit 0
-	#fi
-	if [ ! -f .girt/.index/"$filename" ]
+	#check for file in index
+	if test -e .girt/.index/"$filename"
 	then
-		#check to see if file exists in commit 
-		if test -f .girt/.commit/"$filename"
-		then
-			cat .girt/.commit/"$filename"
-			exit 0
-			
-		else
-			echo "girt-show: error: '$filename' not found in index"
-			exit 1
-		fi
+		cat .girt/.index/"$filename"
+		exit 0
+	else
 		echo "girt-show: error: '$filename' not found in index"
 		exit 1
 	fi
-	cat .girt/.index/"$filename"
+	
+	#check for file in commit folder
+	if test -e .girt/.commit/"$filename"
+	then
+		cat .girt/.commit/"$filename"
+		exit 0
+
+	#if file not found
+	else
+		echo "girt-show: error: '$filename' not found in index"
+		exit 1
+	fi
+	cat .girt/.commit/"$filename"
 	exit 0
+else
+	#ensure commit number is valid
+	if [ "$commit" -gt "$total_commits" ]
+	then
+		echo "girt-show: error: unknown commit '$commit'"
+		exit 1
+	fi
+	#ensure commit number is valid		
+	if [ "$commit" -le "$total_commits" ]
+	then		
+		#check if file exists in commit folder
+		if test -f .girt/.commit/$filename
+		then
+			#check if file is within previous commit folder
+			if test -e .girt/.commit/$commit/$filename
+			then
+			#	cat .girt/.commit/"$filename"
+				:
+			else
+				echo "girt-show: error: '$filename' not found in commit $commit"
+				#cat .girt/.commit/$filename
+				exit 0
+			fi	
+			
+			cat .girt/.commit/$commit/$filename
+			exit 0
+		else
+			echo "girt-show: error: '$filename' not found in commit $commit"
+		fi
+	fi
 fi
 
-# test is file exists in specific commit
-if test ! -f .girt/.commit/"$commit"/"$filename"
-then
-	echo "girt-show: error: '$filename' not found in commit $commit"
-	exit 1
-fi
-
-cat .girt/.commit/"$commit"/"$filename"
+exit 0

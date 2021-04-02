@@ -28,4 +28,7 @@ Fridat 26th March 1400 1700
 	went to the help session. discovered that the problems I have been facing the last few days had nothing to do with my girt-show but rather my girt-commit. I was deleting the file from the index once committed which was causing the problem with girt-show becuase the file was not in a specific commit folder and not in the index, printing an error message and failing autotest. Removed the rm from my girt-commit. Now facing problems with the commit -a and girt-show again. will need to diagnose. for whatever reason it wont cat my filesanymore?? strange.
 
 Thursday 1st April 1000 1200
-	Completed all subsets.... april fools. For the girt-commit -a , i was trying to re-write the entire "function/feature" instead I should have just been calling girt-add since that is the same functionality that is required to pass the autotests. after weeks of going round and round in circles I am now redy to go back to working on girt-rm.... wooooo   
+	Completed all subsets.... april fools. For the girt-commit -a , i was trying to re-write the entire "function/feature" instead I should have just been calling girt-add since that is the same functionality that is required to pass the autotests. after weeks of going round and round in circles I am now redy to go back to working on girt-rm.... wooooo
+
+Friday 2nd April 0900 1100 
+	got my error messages.. i think? working for the girt-rm.. need to now actually starting working on rm and when and where the file should be removed and / or forced removed etc. more research and then back to it yeeewww   

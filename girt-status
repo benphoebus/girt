@@ -1,0 +1,7 @@
+#!/bin/dash
+
+if test ! -e ".girt"
+then 
+	echo "girt-status: error: girt repository directory .girt not found"
+	exit 1
+fi

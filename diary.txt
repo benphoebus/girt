@@ -31,4 +31,8 @@ Thursday 1st April 1000 1200
 	Completed all subsets.... april fools. For the girt-commit -a , i was trying to re-write the entire "function/feature" instead I should have just been calling girt-add since that is the same functionality that is required to pass the autotests. after weeks of going round and round in circles I am now redy to go back to working on girt-rm.... wooooo
 
 Friday 2nd April 0900 1100 
-	got my error messages.. i think? working for the girt-rm.. need to now actually starting working on rm and when and where the file should be removed and / or forced removed etc. more research and then back to it yeeewww   
+	got my error messages.. i think? working for the girt-rm.. need to now actually starting working on rm and when and where the file should be removed and / or forced removed etc. more research and then back to it yeeewww
+
+
+Saturday 3rd April 
+	need to start working on the test suite and think about submitting the assignment. satisfied with the amount of work put in thus far and what I have learnt about git and version control in general.    

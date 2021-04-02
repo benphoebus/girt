@@ -35,4 +35,4 @@ Friday 2nd April 0900 1100
 
 
 Saturday 3rd April 
-	need to start working on the test suite and think about submitting the assignment. satisfied with the amount of work put in thus far and what I have learnt about git and version control in general.    
+	need to start working on the test suite and think about submitting the assignment. satisfied with the amount of work put in thus far and what I have learnt about git and version control in general. self plagarised the test suite from last years shrug assignemnt, had to run a sed command to change shrug to girt and append the comment that it was taken from my own work in last years assignment per Andrews email 23rd March.     

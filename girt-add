@@ -13,9 +13,6 @@ do
 	#test if file included in command line
 	if test -e "$files"
 	then
-
-		#compare file with existing files in index 
-			#if identical break 
 		
 
 		# test if valid filename
